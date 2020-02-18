@@ -4,31 +4,31 @@ services:
     image: prom/prometheus
     container_name: prometheus
     volumes:
-      - ./prometheus:/etc/prometheus
-    command: "--config.file=/etc/prometheus/prometheus.yaml"
+      - ./etc/prometheus:/etc/prometheus
+    command: "--config.file=/etc/prometheus/prometheus.yml"
     ports:
       - 9090:9090
     restart: always
-  exporter:
-    image: prom/node-exporter:latest
-    container_name: node-exporter
-    ports:
-      - 9100:9100
-    restart: always
-    #alertmanager:
-    #image: prom/alertmanager
-    #container_name: alertmanager
-    #volumes:
-    #  - ./alertmanager:/etc/alertmanager
-    #command: "--config.file=/etc/alertmanager/config.yaml"
-    #ports:
-    #  - 9093:9093
-    #restart: always
+  # exporter:
+    # image: prom/node-exporter:latest
+    # container_name: node-exporter
+    # ports:
+      # - 9100:9100
+    # restart: always
+  # alertmanager:
+    # image: prom/alertmanager
+    # container_name: alertmanager
+    # volumes:
+    #   - ./alertmanager:/etc/alertmanager
+    # command: "--config.file=/etc/alertmanager/config.yaml"
+    # ports:
+      # - 9093:9093
+    # restart: always
   snmp-exporter:
     image: prom/snmp-exporter
     container_name: snmp-exporter
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./exporter/snmp.yml:/etc/snmp_exporter/snmp.yml
+      - ./etc/exporter/snmp.yml:/etc/snmp_exporter/snmp.yml
     ports:
       - 9116:9116
